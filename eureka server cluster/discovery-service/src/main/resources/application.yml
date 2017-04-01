@@ -1,0 +1,54 @@
+---
+spring:
+  profiles: peer1
+  application:
+    name: discovery-service
+server:
+  port: 8761
+eureka:
+  instance:
+    hostname: peer1
+    ip-address: 192.168.3.84
+    prefer-ip-address: true
+    instance-id: ${eureka.instance.ip-address}:${server.port}
+  client:
+     register-with-eureka: true
+     fetch-registry: true
+     service-url:
+      defaultZone: http://192.168.3.61:8761/eureka/,http://192.168.3.166:8761/eureka/
+---
+spring:
+  profiles: peer2
+  application:
+    name: discovery-service
+server:
+  port: 8761
+eureka:
+  instance:
+    hostname: peer2
+    ip-address: 192.168.3.61
+    prefer-ip-address: true
+    instance-id: ${eureka.instance.ip-address}:${server.port}
+  client:
+     register-with-eureka: true
+     fetch-registry: true
+     service-url:
+      defaultZone: http://192.168.3.84:8761/eureka/,http://192.168.3.166:8761/eureka/
+---
+spring:
+  profiles: peer3
+  application:
+    name: discovery-service
+server:
+  port: 8761
+eureka:
+  instance:
+    hostname: peer3
+    ip-address: 192.168.3.166
+    prefer-ip-address: true
+    instance-id: ${eureka.instance.ip-address}:${server.port}
+  client:
+     register-with-eureka: true
+     fetch-registry: true
+     service-url:
+      defaultZone: http://192.168.3.84:8761/eureka/,http://192.168.3.61:8761/eureka/
